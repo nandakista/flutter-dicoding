@@ -1,0 +1,36 @@
+{
+  "package": "skybase",
+  "name": "entity_sample",
+  "variables": [
+    {
+      "type": "String?",
+      "name": "id",
+      "key": "id"
+    },
+    {
+      "type": "String?",
+      "name": "name",
+      "key": "name"
+    },
+    {
+      "type": "String?",
+      "name": "description",
+      "key": "description"
+    },
+    {
+      "type": "String?",
+      "name": "imageUrl",
+      "key": "pictureId"
+    },
+    {
+      "type": "String?",
+      "name": "city",
+      "key": "city"
+    },
+    {
+      "type": "double?",
+      "name": "rating",
+      "key": "rating"
+    }
+  ]
+}
