@@ -11,9 +11,9 @@ class AppInfo extends GetxService {
   late PackageInfo _packageInfo;
   PackageInfo get get => _packageInfo;
 
-  @override
-  void onInit() async {
-    _packageInfo = await PackageInfo.fromPlatform();
-    super.onInit();
+  set set(PackageInfo packageInfo) => _packageInfo = packageInfo;
+
+  static setInfo(PackageInfo packageInfo) {
+    AppInfo.find.set = packageInfo;
   }
 }

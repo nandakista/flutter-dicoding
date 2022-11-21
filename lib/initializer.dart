@@ -35,13 +35,13 @@ class Initializer {
     await HiveDb.init();
     await GetStorage.init();
     await Get.putAsync(() async => GetStorage());
-    Get.putAsync(() async => const FlutterSecureStorage());
+    await Get.putAsync(() async => const FlutterSecureStorage());
 
     // Configuration
     // ---Locale
     await initializeDateFormatting('id_ID', null);
     // --- Package Info
-    await Get.putAsync(() async => AppInfo());
+    Get.lazyPut(() => AppInfo());
     // --- App Config
     Get.lazyPut(() => AppEnv());
     // --- Request Client
