@@ -10,11 +10,11 @@ abstract class BaseController extends GetxController {
   RxBool isError = false.obs;
 
   showLoading() {
-    isLoading.toggle();
+    isLoading.value = true;
     isError.value = false;
     errorMessage.value = '';
   }
-  hideLoading() => isLoading.toggle();
+  hideLoading() => isLoading.value = false;
 
   showError(String message) {
     errorMessage.value = message;

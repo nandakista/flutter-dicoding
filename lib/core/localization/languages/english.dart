@@ -41,6 +41,7 @@ const Map<String, String> en = {
   'txt_media': 'Media',
   'txt_preview': 'Preview',
   'txt_oops': 'Oops',
+  'txt_tap_to_retry': 'Tap to Retry',
 
   // Sentence
   'txt_restaurant_subtitle': 'Lets find your favorite food...',

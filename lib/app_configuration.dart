@@ -21,7 +21,7 @@ class AppConfiguration {
   static const someStagingKey = 'Some Key';
 
   //-- Development
-  static const developmentAPI = 'https://api.github.com';
+  static const developmentAPI = 'https://restaurant-api.dicoding.dev';
   static const developmentSocket = 'https://api.github.com';
   static const someDevKey = 'Some Key';
 

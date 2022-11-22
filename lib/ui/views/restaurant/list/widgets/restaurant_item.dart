@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:skybase/app_configuration.dart';
 import 'package:skybase/core/themes/app_style.dart';
-import 'package:skybase/data/models/restaurant_model.dart';
+import 'package:skybase/domain/entities/restaurant/restaurant.dart';
 import 'package:skybase/ui/views/restaurant/detail/restaurant_detail_view.dart';
 import 'package:skybase/ui/widgets/rating_builder.dart';
 import 'package:skybase/ui/widgets/sky_box.dart';
@@ -10,7 +11,7 @@ import 'package:skybase/ui/widgets/sky_image.dart';
 class RestaurantItem extends StatelessWidget {
   const RestaurantItem({Key? key, required this.data}) : super(key: key);
 
-  final RestaurantModel data;
+  final Restaurant data;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,8 @@ class RestaurantItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SkyImage(
-            url: data.imageUrl.toString(),
+            url:
+                '${AppConfiguration.developmentAPI}/images/medium/${data.pictureId}',
             height: 100,
             width: 100,
             borderRadius: BorderRadius.circular(12),
@@ -63,34 +65,6 @@ class RestaurantItem extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(data.city.toString()),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    Row(
-                      children: [
-                        const SkyImage(
-                          url: 'assets/images/ic_drink.png',
-                          height: 16,
-                          width: 16,
-                        ),
-                        const SizedBox(width: 8),
-                        Text('${data.menus?.drinks?.length} Drinks'),
-                      ],
-                    ),
-                    const SizedBox(width: 16),
-                    Row(
-                      children: [
-                        const SkyImage(
-                          url: 'assets/images/ic_food.png',
-                          height: 16,
-                          width: 16,
-                        ),
-                        const SizedBox(width: 8),
-                        Text('${data.menus?.foods?.length} Foods'),
                       ],
                     ),
                   ],

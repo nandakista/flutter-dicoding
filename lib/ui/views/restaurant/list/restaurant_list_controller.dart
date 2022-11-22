@@ -1,15 +1,21 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/base/base_controller.dart';
-import 'package:skybase/data/models/restaurant_model.dart';
+import 'package:skybase/domain/entities/restaurant/restaurant.dart';
+import 'package:skybase/domain/usecases/get_list_restaurant.dart';
+import 'package:skybase/domain/usecases/search_restaurant.dart';
 
 class RestaurantListController extends BaseController {
+  final GetListRestaurant getListRestaurant;
+  final SearchRestaurant searchRestaurant;
+
+  RestaurantListController({
+    required this.getListRestaurant,
+    required this.searchRestaurant,
+  });
+
   String tag = 'HomeController : ';
-  RxList<RestaurantModel> dataRestaurant = <RestaurantModel>[].obs;
-  RxList<RestaurantModel> listRestaurant = <RestaurantModel>[].obs;
+  RxList<Restaurant> dataRestaurant = <Restaurant>[].obs;
+  RxList<Restaurant> listRestaurant = <Restaurant>[].obs;
 
   @override
   onInit() {
@@ -20,34 +26,32 @@ class RestaurantListController extends BaseController {
   Future<void> loadData() async {
     try {
       showLoading();
-      await Future.delayed(const Duration(seconds: 1));
-      final data = await getDataFromJsonFile();
-      listRestaurant.addAll(List<RestaurantModel>.from(
-        data.map((data) => RestaurantModel.fromJson(data)),
-      ));
+      await getListRestaurant().then((data) {
+        listRestaurant.addAll(data ?? []);
+      });
       hideLoading();
     } catch (e) {
       hideLoading();
-      showError('$tag: Error = $e');
+      showError(e.toString());
     }
   }
 
-  localSearch(String? query) async {
-    if (query == '' || query == null) {
-      dataRestaurant.clear();
-      dataRestaurant.addAll(listRestaurant);
-    } else {
-      dataRestaurant.clear();
-      dataRestaurant.addAll(listRestaurant
-          .where((e) =>
-              e.name?.toLowerCase().contains(query.toLowerCase()) == true)
-          .toList());
+  Future<void> searchData(String? query) async {
+    try {
+      showLoading();
+      if(query == null || query == '') {
+        dataRestaurant.clear();
+        dataRestaurant.addAll(listRestaurant);
+      } else {
+        await searchRestaurant(query: query.toString()).then((data) {
+          dataRestaurant.clear();
+          dataRestaurant.addAll(data ?? []);
+        });
+      }
+      hideLoading();
+    } catch (e) {
+      hideLoading();
+      showError(e.toString());
     }
   }
-}
-
-Future<dynamic> getDataFromJsonFile<T>() async {
-  final response = await rootBundle.loadString('assets/jsons/restaurant.json');
-  final data = await json.decode(response);
-  return data['restaurants'];
 }

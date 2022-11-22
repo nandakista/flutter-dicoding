@@ -49,7 +49,7 @@ class RestaurantListView extends GetView<RestaurantListController> {
                 SkyFormField(
                   icon: Icons.search,
                   hint: 'txt_search_restaurant'.tr,
-                  onChanged: (query) => controller.localSearch(query),
+                  onChanged: (query) => controller.searchData(query),
                 ),
                 const SizedBox(height: 12),
                 Expanded(

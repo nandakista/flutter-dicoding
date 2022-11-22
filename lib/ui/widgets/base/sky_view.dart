@@ -30,17 +30,19 @@ class SkyView extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () => Future.sync(onRetry),
-      child: SingleChildScrollView(
-        child: loadingEnabled
-            ? loadingView ?? const ShimmerDetail()
-            : (errorEnabled)
-                ? errorView ??
-                    ErrorView(
-                      isScrollable: false,
-                      errorSubtitle: errorMsg,
-                      onRetry: onRetry,
-                    )
-                : child,
+      child: Center(
+        child: SingleChildScrollView(
+          child: loadingEnabled
+              ? loadingView ?? const ShimmerDetail()
+              : (errorEnabled)
+                  ? errorView ??
+                      ErrorView(
+                        isScrollable: false,
+                        errorSubtitle: errorMsg,
+                        onRetry: onRetry,
+                      )
+                  : child,
+        ),
       ),
     );
   }

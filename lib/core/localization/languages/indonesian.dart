@@ -35,6 +35,7 @@ const Map<String, String> id = {
   'txt_price': 'Harga',
   'txt_media': 'Media',
   'txt_preview': 'Preview',
+  'txt_tap_to_retry': 'Tap untuk mencoba lagi',
 
   //Validation
   'txt_restaurant_subtitle': 'Ayo temukan makanan favoritmu...',
